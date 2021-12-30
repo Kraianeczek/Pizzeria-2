@@ -52,7 +52,61 @@
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
   };
 
+  class Product {
+    constructor(id, data){
+      const thisProduct = this;
+
+      thisProduct.id = id;
+      thisProduct.data = data;
+
+      thisProduct.renderInMenu();
+      thisProduct.initAccordion();
+      console.log('new Product:', thisProduct);
+    }
+
+    renderInMenu() {
+      const thisProduct = this;
+
+      const generatedHTML = templates.menuProduct(thisProduct.data);          /* generate HTML on template */
+      console.log('HTML: ', generatedHTML);
+      thisProduct.element = utils.createDOMFromHTML(generatedHTML);          /* create element using utils.createElementFromHTML */
+      const menuContainer = document.querySelector(select.containerOf.menu);  /* find menu container */
+      menuContainer.appendChild(thisProduct.element);                         /* add element to menu */
+    }
+
+    initAccordion() {
+      const thisProduct = this;
+
+      const clickableTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);                  /* find the clickable trigger (product_header) */
+      console.log('srhfdghj', clickableTrigger);
+      clickableTrigger.addEventListener('click', function(event){
+        event.preventDefault(); 
+        const activeWrapper =  document.querySelector(select.all.menuProductsActive);
+        if (activeWrapper != thisProduct.element && activeWrapper != null){
+          activeWrapper.classList.remove(classNames.menuProduct.wrapperActive);
+        } 
+        thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
+      });
+    }
+  }
+
   const app = {
+    initData: function() {
+      const thisApp = this;
+
+      thisApp.data = dataSource;
+    },
+
+    initMenu: function() {
+      const thisApp = this;
+      console.log('thisApp.data: ', thisApp.data);
+      
+      for (let productData in thisApp.data.products) { 
+        new Product(productData /* nazwa aktualnie "obsługiwanej" właściwości, czyli np. class/name/price */, thisApp.data.products[productData] /* parametry dla włąściwości */);
+        
+      }
+    },
+
     init: function(){
       const thisApp = this;
       console.log('*** App starting ***');
@@ -60,6 +114,9 @@
       console.log('classNames:', classNames);
       console.log('settings:', settings);
       console.log('templates:', templates);
+
+      thisApp.initData();
+      thisApp.initMenu();
     },
   };
 
