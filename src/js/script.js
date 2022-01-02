@@ -150,6 +150,7 @@
       thisProduct.cartButton.addEventListener('click', function(event){
         event.preventDefault();
         thisProduct.processOrder();
+        thisProduct.addToCart();
       });
     }
 
@@ -196,6 +197,7 @@
         }  
       }
       price *= thisProduct.amountWidget.value;
+      thisProduct.priceSingle = price;
       thisProduct.priceElem.innerHTML = price;
     }
 
@@ -207,6 +209,57 @@
         thisProduct.processOrder();
       });
     }
+
+    addToCart() {
+      const thisProduct = this;
+
+      app.cart.add(thisProduct.prepareCartProduct());
+    }
+
+    prepareCartProduct() {
+      const thisProduct = this;
+
+      const productSummary = {};
+      productSummary.id = thisProduct.id;
+      productSummary.name = thisProduct.data.name;
+      productSummary.amount = thisProduct.amountWidget.value;
+      productSummary.priceSingle = thisProduct.data.price;
+      productSummary.price = thisProduct.priceSingle;
+
+      productSummary.params ={};
+      productSummary.params = thisProduct.prepareCartProductParams();
+
+      return productSummary;
+    }
+
+    prepareCartProductParams() {
+      const thisProduct = this;
+
+      const formData = utils.serializeFormToObject(thisProduct.form);    
+      const params = {};
+
+      for (let paramId in thisProduct.data.params) {                          // for every category (param)...
+        const param = thisProduct.data.params[paramId];                       // determine param value, e.g. paramId = {label: 'Toppings', type: 'checkboxes'}
+        // console.log(paramId, param);
+
+        params[paramId] = {
+          label: param.label,
+          options: {}
+        };
+
+        for (let optionId in param.options) {                                 // for every option in this category
+          const option = param.options[optionId];                             // determine option value, e.g. optionId = 'olives', option = {label: 'Olives', price: '2', default: true}
+          // console.log(optionId, option);
+
+          // if(formData[paramId] && formData[paramId].includes(optionId)) {     // check if there is param with a name of paramId in formData and if it includes optionId
+          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+          if(optionSelected) {
+            params[paramId].options[optionId] = option.label;
+          } 
+        }  
+      }
+      return params;
+    }  
   }
 
 
@@ -286,6 +339,7 @@
 
       thisCart.dom.wrapper = element;
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
+      thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
     }
 
     initActions(){
@@ -294,6 +348,14 @@
       thisCart.dom.toggleTrigger.addEventListener('click', function(){
         thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
       });
+    }
+
+    add(menuProduct) {
+      const thisCart = this;
+
+      const generatedHTML = templates.cartProduct(menuProduct);
+      const generatedDOM = utils.createDOMFromHTML(generatedHTML);
+      thisCart.dom.productList.appendChild(generatedDOM);
     }
   }
 
