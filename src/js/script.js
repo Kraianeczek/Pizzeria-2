@@ -271,7 +271,7 @@
 
       /* TODO: Add validation */
 
-      if(thisWidget.value !== newValue && !isNaN(newValue) && newValue >= 0 && newValue <= 10){
+      if(thisWidget.value !== newValue && !isNaN(newValue) && newValue >= 1 && newValue <= 9){
         thisWidget.value = newValue;
       }
       thisWidget.input.value = thisWidget.value;
@@ -379,10 +379,13 @@
       thisCart.dom.totalPriceBottom.innerHTML = thisCart.totalPrice;
     }
 
-    remove(removedProduct) {
+    remove(removedProduct){
       const thisCart = this;
 
-      
+      const indexOfRemovedProduct = thisCart.products.indexOf(removedProduct);    // wybiera index z tablicy thisCart.products
+      removedProduct.dom.wrapper.remove();
+      thisCart.products.splice(indexOfRemovedProduct, 1);                         // wycina indexOfRemovedProduct
+      thisCart.update();                                                          // aktualizuje cenę
     }
   }
 
