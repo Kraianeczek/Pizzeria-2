@@ -83,35 +83,35 @@ class Product {
       const param = thisProduct.data.params[paramId];                       // determine param value, e.g. paramId = {label: 'Toppings', type: 'checkboxes'}
       for (let optionId in param.options) {                                 // for every option in this category
         const option = param.options[optionId];                             // determine option value, e.g. optionId = 'olives', option = {label: 'Olives', price: '2', default: true}
-        if (formData[paramId] && formData[paramId].includes(optionId)) {     // check if there is param with a name of paramId in formData and if it includes optionId
-          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
-          if (optionSelected) {
-            if (!option.default == true) {                                     // check if the option is not default
-              price += option.price;                                          // add option price to price variable
-            }
-          } else {
-            if (option.default == true) {                                      // check if the option is default
-              price -= option.price;                                            // reduce price variable
-            }
+        // check if there is param with a name of paramId in formData and if it includes optionId
+        const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+        if (optionSelected) {
+          if (!option.default == true) {                                     // check if the option is not default
+            price += option.price;                                          // add option price to price variable
           }
+        } else {
+          if (option.default == true) {                                      // check if the option is default
+            price -= option.price;                                            // reduce price variable
+          }
+        }
 
-          const image = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
+        const image = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
 
-          if (image) {
-            if (formData[paramId] && formData[paramId].includes(optionId)) {
-              if (optionSelected) {
-                image.classList.add(classNames.menuProduct.imageVisible);
-              } else {
-                image.classList.remove(classNames.menuProduct.imageVisible);
-              }
+        if (image) {
+          if (formData[paramId] && formData[paramId].includes(optionId)) {
+            if (optionSelected) {
+              image.classList.add(classNames.menuProduct.imageVisible);
+            } else {
+              image.classList.remove(classNames.menuProduct.imageVisible);
             }
           }
         }
-        price *= thisProduct.amountWidget.value;
-        thisProduct.priceSingle = price;
-        thisProduct.priceElem.innerHTML = price;
+        
       }
     }
+    price *= thisProduct.amountWidget.value;
+    thisProduct.priceSingle = price;
+    thisProduct.priceElem.innerHTML = price;
   }
 
   initAmountWidget() {
@@ -131,7 +131,8 @@ class Product {
     const event = new CustomEvent('add-to-cart', {
       bubbles: true, 
       detail: {
-        product: thisProduct,
+        product:
+        thisProduct.prepareCartProduct(),
       },
     });
 

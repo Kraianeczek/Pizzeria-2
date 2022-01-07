@@ -27,7 +27,7 @@ const app = {
     const thisApp = this;
 
     for (let productData in thisApp.data.products) {
-      new Product(thisApp.data.products[productData]   /*productData /* nazwa aktualnie "obsługiwanej" właściwości, czyli np. class/name/price */, thisApp.data.products[productData] /* parametry dla włąściwości */);
+      new Product(productData   /*productData /* nazwa aktualnie "obsługiwanej" właściwości, czyli np. class/name/price */, thisApp.data.products[productData] /* parametry dla włąściwości */);
 
     }
   },
