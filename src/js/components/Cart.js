@@ -1,4 +1,4 @@
-import {settings, select, templates, classNames} from '../settings.js';
+import { settings, select, templates, classNames } from '../settings.js';
 import utils from '../utils.js';
 import CartProduct from './CartProduct.js';
 
@@ -95,7 +95,7 @@ class Cart {
   sendOrder() {
     const thisCart = this;
 
-    const url = settings.db.url + '/' + settings.db.orders;
+    const urlOrders = settings.db.url + '/' + settings.db.orders;
 
     const payLoad = {};
 
@@ -119,7 +119,7 @@ class Cart {
       },
       body: JSON.stringify(payLoad),
     };
-    fetch(url, options);
+    fetch(urlOrders, options);
   }
 }
 
