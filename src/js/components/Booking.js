@@ -36,7 +36,7 @@ class Booking {
       ],
     };
 
-    // console.log('getDataaa params', params);
+    // console.log('getDataa params', params);
 
     const urls = {
       booking:       settings.db.url + '/' + settings.db.booking 
