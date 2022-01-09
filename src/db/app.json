@@ -261,5 +261,15 @@
          "starters": []
       }
    ],
-   "bookings": []
+   "booking": [
+      {  
+         "id": 1,
+         "date": "2021-01-15",
+         "hour": "12:30",
+         "table": 1,
+         "duration": 4,
+         "ppl": 3,
+         "starters": []
+      }
+   ]
 }
