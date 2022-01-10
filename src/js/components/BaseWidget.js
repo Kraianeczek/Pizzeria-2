@@ -52,9 +52,9 @@ class BaseWidget {
     const event = new CustomEvent('updated', {
       bubbles: true
     });
-    setTimeout(() => {
-      thisWidget.dom.wrapper.dispatchEvent(event);
-    }, 0);
+    //setTimeout(() => {
+    thisWidget.dom.wrapper.dispatchEvent(event);
+    // }, 0);
   }
 }
 
