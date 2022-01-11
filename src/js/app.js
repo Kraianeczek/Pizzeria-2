@@ -52,10 +52,9 @@ const app = {
     }
 
     for(let link of thisApp.navLinks) {
-      link.classList.toggle(
-        classNames.nav.active,
-        link.getAttribute('href') == '#/' + pageId
-      );
+      link.addEventListener('click', function(){
+        link.classList.toggle('active');
+      });
     }
   },
 
