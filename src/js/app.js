@@ -39,24 +39,20 @@ const app = {
     const thisApp = this;
 
     for(const page of thisApp.pages) {
-      // if(page.id === pageId){
-      //   page.classList.add(classNames.pages.active);
-      // } else {
-      //   page.classList.remove(classNames.pages.active);
-      // }
-
       page.classList.toggle(
         classNames.pages.active,
         page.id == pageId
-      ); // to samo co wyżej
+      ); 
     }
 
     for(let link of thisApp.navLinks) {
-      link.addEventListener('click', function(){
-        link.classList.toggle('active');
-      });
+      link.classList.toggle(
+        classNames.nav.active,
+        link.getAttribute('href') == '#' + pageId
+      );
     }
   },
+
 
   initBooking: function() {
     const thisApp = this;
