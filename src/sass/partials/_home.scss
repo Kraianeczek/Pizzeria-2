@@ -1,0 +1,138 @@
+#home {
+    .opening {
+        display: flex;
+        justify-content: space-between;
+
+        & .col-6{
+            position: relative;
+            
+            &:hover {
+                cursor: pointer;
+            }
+
+            &:hover h2 {
+                margin-top: -30px;
+                transition: 0.3s linear;
+            }
+        }
+
+        & .pizza {
+            position: absolute;
+            text-align: center;
+            left: 50%;
+            top: 55%;
+            transform: translate(-50%, -50%);
+    
+            & h2 {
+                color: white;
+            }
+        }
+    }
+
+    .opening .book img, .opening .order img {
+        margin: 5px 0;
+        height: 130px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 5px;
+    }    
+
+    .open-hours {
+        background-color: $color-main;
+        text-align: center;
+        color: white;
+        font-family: $font-header;
+        border-radius: 5px;
+
+        & h2 {
+            font-size: 48px;
+            letter-spacing: 3px;
+        }
+
+        & h4 {
+            font-size: 36px;
+        }
+
+        & h6 {
+            font-family: $font-text;
+            font-size: 10px;
+        }
+    }
+
+    .carousel-item {
+        background-color: white;
+        margin-top: 100px;
+        margin-bottom: 100px;
+
+        & .carousel-caption {
+            text-align: left;
+            left: 55%;
+            top: 5%;
+            color: black;
+
+            & h1 {
+                font-family: $font-header;
+                font-size: 48px;
+                margin-bottom: 20px;
+            }
+
+            & p {
+                font-family: $font-text;
+                font-size: 18px;
+            }
+        }
+    }
+
+    .arrows {
+        margin: 5px;
+        top: 50%;
+        background-color: black;
+        width: 50px;
+        height: 50px;
+        border-radius: 25%;
+    }
+
+    .gallery .col-4 img {
+        height: 250px;
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        &:hover {
+            opacity: 0.8;
+            transition: 1s;
+        }
+    }
+
+    .gallery a {
+        color: $color-main;
+    }
+
+    .icons {
+        position: absolute;
+        z-index: 1;
+        bottom: 40%;
+        left: 25%;
+    }
+
+    .gallery li {
+        list-style-type: none;
+        display: inline;
+        margin: 5px;
+        visibility: hidden;
+
+        & i {
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+
+            &:hover {
+                color: $color-main;
+                transition: 0.5s;
+            }
+        }
+    }
+
+    .gallery .col-4:hover i {
+        visibility: visible;
+    }
+}
