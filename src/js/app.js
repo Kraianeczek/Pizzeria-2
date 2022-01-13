@@ -11,7 +11,6 @@ const app = {
     thisApp.pages = document.querySelector(select.containerOf.pages).children;   
     thisApp.navLinks = document.querySelectorAll(select.nav.links); 
     const idFromHash = window.location.hash.replace('#/', '');
-    console.log('idFromHash', idFromHash);
 
     let pageMatchingHash = thisApp.pages[0].id;
 
@@ -72,8 +71,6 @@ const app = {
         return rawResponse.json();
       })
       .then(function (parsedResponse) {
-        console.log('parsedResponse', parsedResponse);
-
         thisApp.data.products = parsedResponse;         /* save parsedResponse as thisApp.data.products */
 
         thisApp.initMenu();                             /* execute initMenu method */

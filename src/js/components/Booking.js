@@ -38,8 +38,6 @@ class Booking {
       ],
     };
 
-    // console.log('getDataa params', params);
-
     const urls = {
       bookings:       settings.db.url + '/' + settings.db.booking 
                                      + '?' + params.booking.join('&'),
@@ -65,12 +63,8 @@ class Booking {
         ]);
       })
       .then(function([bookings, eventsCurrent, eventsRepeat]){
-        console.log('xd', bookings);
-        console.log('xd1', eventsCurrent);
-        console.log('xd2', eventsRepeat);
         thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
       });
-    // console.log('geatData urls', urls);
   }
 
   parseData(bookings, eventsCurrent, eventsRepeat ){
@@ -96,7 +90,6 @@ class Booking {
         }
       }
     }
-    console.log('thisBooking.booked', thisBooking.booked);
     thisBooking.updateDOM();
   }
 
@@ -164,7 +157,6 @@ class Booking {
     thisBooking.dom.wrapper.innerHTML = generatedHTML;
 
     thisBooking.dom.peopleAmount = element.querySelector(select.booking.peopleAmount);
-    console.log('klon:', thisBooking.dom.peopleAmount);
     thisBooking.dom.hoursAmount = element.querySelector(select.booking.hoursAmount);
 
     thisBooking.dom.datePicker = element.querySelector(select.widgets.datePicker.wrapper);
