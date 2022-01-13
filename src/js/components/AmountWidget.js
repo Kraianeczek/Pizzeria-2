@@ -8,7 +8,7 @@ class AmountWidget extends BaseWidget {
     const thisWidget = this;
 
     thisWidget.getElements(element);
-    // 10 thisWidget.value = settings.amountWidget.defaultValue;
+    thisWidget.value = settings.amountWidget.defaultValue;
     // 10 thisWidget.setValue(thisWidget.input.value);  // lub (element.children[1].value || settings.amountWidget.defaultValue);  zamiast wyżej i po setValue
     thisWidget.initActions();
     // console.log('AmountWidget: ', thisWidget);
@@ -69,5 +69,5 @@ class AmountWidget extends BaseWidget {
     });
   }
 }
-
+console.log('am',AmountWidget);
 export default AmountWidget;

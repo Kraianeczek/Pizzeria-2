@@ -79,7 +79,6 @@ class Cart {
     thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
     thisCart.dom.deliveryFee.innerHTML = thisCart.deliveryFee;
     thisCart.dom.totalPrice.innerHTML = thisCart.totalPrice;
-    thisCart.dom.totalPriceBottom.innerHTML = thisCart.totalPrice;
   }
 
   remove(removedProduct) {
