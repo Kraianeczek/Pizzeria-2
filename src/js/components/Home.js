@@ -31,9 +31,9 @@ class Home {
           link.getAttribute('href') == '#' + pageId
         );}
     }
-      //if(thisHome.pages.classList.contains('link1')){
-      // link.getAttribute('href') == '#' + pageId;
-//}
+    //if(thisHome.pages.classList.contains('link1')){
+    // link.getAttribute('href') == '#' + pageId;
+    //}
     //}
   }
 
